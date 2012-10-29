@@ -1,0 +1,69 @@
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'rebel'
+
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        mavenRepo(name: 'zt-public-snapshots', url: 'http://repos.zeroturnaround.com/nexus/content/groups/zt-public/')
+    }
+
+    dependencies {
+        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.0.2-SNAPSHOT'
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+archivesBaseName = 'angular-playground'
+description='Application for playing around with angular js'
+
+ext {
+    springVersion = "3.1.2.RELEASE"
+    jerseyVersion = "1.14"
+}
+
+dependencies {
+    compile "org.springframework:spring-core:${springVersion}"
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-web:${springVersion}"
+    compile "com.sun.jersey.contribs:jersey-spring:${jerseyVersion}"
+    compile "com.sun.jersey:jersey-servlet:${jerseyVersion}"
+    compile "com.sun.jersey:jersey-server:${jerseyVersion}"
+    compile "com.sun.jersey:jersey-json:${jerseyVersion}"
+    compile "com.sun.jersey:jersey-core:${jerseyVersion}"
+    compile "javax.inject:javax.inject:1"
+}
+
+rebel {
+    rebelXmlDirectory = sourceSets.main.output.classesDir
+    classesDirectory = sourceSets.main.output.classesDir
+    warSourceDirectory = webAppDirName
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+    }
+}
+
+httpPort = 8080
+stopPort = 9451
+stopKey = 'foo'
+
+// to run with jrebel :
+//
+// export JAVA_OPTS="-javaagent:/Users/jkuperus/Development/Tools/jrebel/jrebel.jar -Drebel.jersey_plugin=true"
+// export JAVA_OPTS="-javaagent:/Users/jkuperus/Development/Tools/jrebel/jrebel.jar -Drebel.jersey_plugin=true -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
+// gradle generateRebel
+// gradle jettyRun
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.0'
+}

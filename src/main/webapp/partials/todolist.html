@@ -1,0 +1,15 @@
+Tasks remaining {{remaining()}} of {{items.length}}
+
+<ul>
+	<li ng-repeat="item in items">
+		<input type="checkbox" ng-model="item.done"/>
+		
+		<input type="input" ng-model="item.text"/>
+	</li>
+	
+
+	<form>
+		<input ng-model="newItem.text" ng-maxlength="15"/>
+		<button ng-disabled="!newItem.text" ng-click="add(newItem)">add</button>
+	</form>
+</ul>
