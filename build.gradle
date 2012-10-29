@@ -12,7 +12,7 @@ buildscript {
     }
 
     dependencies {
-        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.0.2-SNAPSHOT'
+        classpath 'org.zeroturnaround:gradle-jrebel-plugin:1.0.2-SNAPSHOT'
     }
 }
 
