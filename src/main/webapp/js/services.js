@@ -3,7 +3,7 @@
 /* Services */
 
 
-angular.module('myApp.services', ['ngResource']).
+angular.module('addressBook.services', ['ngResource']).
   factory('Address', ['$resource',function($resource) {
 
     var Address = $resource('resources/addresses/:id', { id:'@id'}, {
