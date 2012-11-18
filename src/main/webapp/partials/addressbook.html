@@ -1,0 +1,9 @@
+<ul>
+    <li ng-repeat="address in addresses">
+        {{ address.firstname }} {{ address.middlename }} {{ address.lastname }}
+
+        <a href="#/addressbook/{{address.id}}" ng-click="edit(address)">edit</a>
+    </li>
+
+    <a href="#/addressbook/new">Add new</a>
+</ul>

@@ -17,7 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Jelmer Kuperus
  */
 @Named
-@Path("/adresses")
+@Path("/addresses")
 public class AddressResource {
 
     @Inject
@@ -63,7 +63,20 @@ public class AddressResource {
         addressRepository.save(address);
 
         return Response.noContent().build();
+    }
 
+    @DELETE
+    @Path("{id}")
+    public Response delete(@PathParam("id") String id) {
+        Address address = addressRepository.findOne(id);
+
+        if (address == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        addressRepository.delete(address);
+
+        return Response.noContent().build();
     }
 
     @POST
@@ -77,6 +90,5 @@ public class AddressResource {
 
         return Response.created(uri).build();
     }
-
 
 }

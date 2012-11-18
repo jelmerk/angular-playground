@@ -1,0 +1,22 @@
+<form>
+    <div>
+        <label for="firstname">First name</label>
+        <input id="firstname" ng-model="address.firstname" />
+    </div>
+
+    <div>
+        <label for="middlename">Middle name</label>
+        <input id="middlename" ng-model="address.middlename" />
+    </div>
+
+    <div>
+        <label for="lastname">Last name</label>
+        <input id="lastname" ng-model="address.lastname" />
+    </div>
+
+    <div>
+        <button ng-show="address.id == null" ng-click="add(address)">Save</button>
+        <button ng-show="address.id != null" ng-click="update(address)">Update</button>
+        <button ng-show="address.id != null" ng-click="delete(address)">Delete</button>
+    </div>
+</form>
