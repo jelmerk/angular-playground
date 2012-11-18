@@ -29,8 +29,10 @@ function AddressController($scope, $location, $routeParams, Address) {
     }
 
     $scope.delete = function(existingAddress) {
+        if (!confirm('Are you sure you want to delete this address?')) {
+            return;
+        }
         existingAddress.$delete();
-
         $location.path('/addressbook');
     }
 

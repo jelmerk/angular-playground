@@ -1,9 +1,36 @@
-<ul>
-    <li ng-repeat="address in addresses">
-        {{ address.firstname }} {{ address.middlename }} {{ address.lastname }}
 
-        <a href="#/addressbook/{{address.id}}" ng-click="edit(address)">edit</a>
-    </li>
 
-    <a href="#/addressbook/new">Add new</a>
-</ul>
+<div class="page-header">
+    <h1>Address book</h1>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <th>First name</th>
+        <th>Middle name</th>
+        <th>Last name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="address in addresses">
+            <td>{{ address.firstname }}</td>
+            <td>{{ address.middlename }}</td>
+            <td>{{ address.lastname }}</td>
+            <td><a href="#/addressbook/{{address.id}}" ng-click="edit(address)">edit</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <ul>
+        <li><a href="#">Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next</a></li>
+    </ul>
+</div>
+
+
+<a href="#/addressbook/new" class="btn btn-primary">Add new</a>
