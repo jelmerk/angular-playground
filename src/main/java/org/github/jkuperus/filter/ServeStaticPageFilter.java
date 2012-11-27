@@ -9,7 +9,8 @@ import java.io.IOException;
  */
 public class ServeStaticPageFilter implements Filter {
 
-    private static final String[] excludePaths = { "/css", "/img/", "/js", "/lib", "/partials", "/resources" };
+    private static final String[] EXCLUDE_PATHS = { "/css", "/img/", "/js", "/lib", "/partials", "/resources" };
+    private static final String STATIC_PAGE = "/index.jsp";
 
     @Override
     public void init(FilterConfig config) throws ServletException {
@@ -22,7 +23,7 @@ public class ServeStaticPageFilter implements Filter {
 
         HttpServletRequest servletRequest = (HttpServletRequest) request;
         if (shouldForward(servletRequest)) {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher(STATIC_PAGE).forward(request, response);
         } else {
             chain.doFilter(request, response);
         }
@@ -35,7 +36,7 @@ public class ServeStaticPageFilter implements Filter {
 
     protected boolean shouldForward(HttpServletRequest request) {
         String uri = request.getServletPath();
-        for (String excludePath : excludePaths) {
+        for (String excludePath : EXCLUDE_PATHS) {
             if (uri.startsWith(excludePath)) {
                 return false;
             }
