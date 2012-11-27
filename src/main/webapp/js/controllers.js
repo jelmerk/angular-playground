@@ -46,6 +46,10 @@ AddressBookController.$inject = ['$scope', '$routeParams', 'Address'];
 
 function AddressController($scope, $location, $routeParams, Address) {
 
+    var back = function() {
+        $location.path('/addressbook');
+    };
+
     if ($routeParams.addressId === 'new') {
         $scope.address = new Address();
     } else {
@@ -53,24 +57,17 @@ function AddressController($scope, $location, $routeParams, Address) {
     }
 
     $scope.add = function(newAddress) {
-        newAddress.$save(function() {
-            $location.path('/addressbook');
-        });
+        newAddress.$save(back);
     }
 
     $scope.update = function(existingAddress) {
-        existingAddress.$update(function() {
-            $location.path('/addressbook');
-        });
+        existingAddress.$update(back);
     }
 
     $scope.delete = function(existingAddress) {
-        if (!confirm('Are you sure you want to delete this address?')) {
-            return;
+        if (confirm('Are you sure you want to delete this address?')) {
+            existingAddress.$delete(back);
         }
-        existingAddress.$delete(function() {
-            $location.path('/addressbook');
-        });
     }
 }
 AddressController.$inject = ['$scope', '$location', '$routeParams', 'Address'];
