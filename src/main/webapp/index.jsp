@@ -3,11 +3,13 @@
 <html lang="en" ng-app="addressBook">
 <head>
     <meta charset="utf-8">
+
+    <!-- TODO: make crawlable See: https://developers.google.com/webmasters/ajax-crawling/docs/specification -->
+    <meta name="fragment" content="!" />
     <title>Address book</title>
 
     <link rel="stylesheet" href="<c:url value="/css/bootstrap.css" />"/>
     <link rel="stylesheet" href="<c:url value="/css/app.css" />"/>
-
 
 </head>
 <body>

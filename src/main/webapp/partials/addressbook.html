@@ -3,22 +3,24 @@
     <h1>Address book</h1>
 </div>
 
-<table class="table table-striped table-hover">
-    <thead>
-        <th>First name</th>
-        <th>Middle name</th>
-        <th>Last name</th>
-        <th></th>
-    </thead>
-    <tbody>
-        <tr ng-repeat="address in addresses.content">
-            <td>{{ address.firstname }}</td>
-            <td>{{ address.middlename }}</td>
-            <td>{{ address.lastname }}</td>
-            <td><a class="btn" href="/addressbook/entry/{{ address.id }}">edit</a></td>
-        </tr>
-    </tbody>
-</table>
+<div style="height: 300px;">
+    <table class="table table-striped table-hover">
+        <thead>
+            <th style="width: 25%">First name</th>
+            <th style="width: 25%">Middle name</th>
+            <th style="width: 25%">Last name</th>
+            <th style="width: 25%"></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="address in addresses.content">
+                <td>{{ address.firstname }}</td>
+                <td>{{ address.middlename }}</td>
+                <td>{{ address.lastname }}</td>
+                <td style="text-align: right"><a class="btn" href="/addressbook/entry/{{ address.id }}">edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <div class="pagination">
     <ul>

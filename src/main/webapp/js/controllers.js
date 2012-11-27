@@ -2,7 +2,7 @@
 
 function AddressBookController($scope, $routeParams, Address) {
 
-    var page = Address.pagedQuery({ pageSize: 2, pageStartIndex: $routeParams.pageStartIndex});
+    var page = Address.pagedQuery({ pageSize: 5, pageStartIndex: $routeParams.pageStartIndex});
 
     $scope.hasPreviousPage = function() {
         return !page.firstPage;
