@@ -22,14 +22,18 @@
 
 <div class="pagination">
     <ul>
-        <li ng-class="{disabled: !hasPreviousPage()}"><a href="#">Prev</a></li>
+        <li ng-class="{disabled: !hasPreviousPage()}">
+            <a href="/angular-playground/addressbook/{{ addresses.number - 1 }}">Prev</a>
+        </li>
 
         <li ng-repeat="n in pages()"
             ng-class="{active: n == addresses.number}">
             <a href="/angular-playground/addressbook/{{ n }}">{{ n + 1 }}</a>
         </li>
 
-        <li ng-class="{disabled: !hasNextPage()}"><a href="#">Next</a></li>
+        <li ng-class="{disabled: !hasNextPage()}">
+            <a href="/angular-playground/addressbook/{{ addresses.number + 1 }}">Next</a>
+        </li>
     </ul>
 </div>
 
