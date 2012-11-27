@@ -15,7 +15,7 @@
             <td>{{ address.firstname }}</td>
             <td>{{ address.middlename }}</td>
             <td>{{ address.lastname }}</td>
-            <td><a class="btn" href="#/addressbook/entry/{{ address.id }}">edit</a></td>
+            <td><a class="btn" href="/angular-playground/addressbook/entry/{{ address.id }}">edit</a></td>
         </tr>
     </tbody>
 </table>
@@ -26,7 +26,7 @@
 
         <li ng-repeat="n in pages()"
             ng-class="{active: n == addresses.number}">
-            <a href="#/addressbook/{{ n }}">{{ n + 1 }}</a>
+            <a href="/angular-playground/addressbook/{{ n }}">{{ n + 1 }}</a>
         </li>
 
         <li ng-class="{disabled: !hasNextPage()}"><a href="#">Next</a></li>
@@ -34,4 +34,4 @@
 </div>
 
 
-<a href="#/addressbook/entry/new" class="btn btn-primary">Add new</a>
+<a href="/angular-playground/addressbook/entry/new" class="btn btn-primary">Add new</a>

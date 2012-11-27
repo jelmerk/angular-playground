@@ -30,6 +30,8 @@ ext {
 }
 
 dependencies {
+    providedCompile "javax.servlet:servlet-api:2.5"
+
     compile 'org.springframework.data:spring-data-mongodb:1.1.0.RELEASE'
     compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
