@@ -6,8 +6,8 @@ angular.module('addressBook', ['addressBook.filters', 'addressBook.services', 'a
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 
-    $routeProvider.when('/angular-playground/addressbook/:pageStartIndex', {templateUrl: '/angular-playground/partials/addressbook.html', controller: AddressBookController});
-    $routeProvider.when('/angular-playground/addressbook/entry/:addressId', {templateUrl: '/angular-playground/partials/address.html', controller: AddressController});
+    $routeProvider.when('/addressbook/:pageStartIndex', {templateUrl: '/partials/addressbook.html', controller: AddressBookController});
+    $routeProvider.when('/addressbook/entry/:addressId', {templateUrl: '/partials/address.html', controller: AddressController});
 
-    $routeProvider.otherwise({redirectTo: '/angular-playground/addressbook/0'});
+    $routeProvider.otherwise({redirectTo: '/addressbook/0'});
   }]);

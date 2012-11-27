@@ -6,7 +6,7 @@
 angular.module('addressBook.services', ['ngResource']).
   factory('Address', ['$resource',function($resource) {
 
-    var Address = $resource('/angular-playground/resources/addresses/:id', { id:'@id'}, {
+    var Address = $resource('/resources/addresses/:id', { id:'@id'}, {
         'update': { method: 'PUT' },
         'pagedQuery': { method: 'GET', isArray:false}
     });
