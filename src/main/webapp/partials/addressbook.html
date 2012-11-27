@@ -1,5 +1,4 @@
 
-
 <div class="page-header">
     <h1>Address book</h1>
 </div>
@@ -12,25 +11,27 @@
         <th></th>
     </thead>
     <tbody>
-        <tr ng-repeat="address in addresses">
+        <tr ng-repeat="address in addresses.content">
             <td>{{ address.firstname }}</td>
             <td>{{ address.middlename }}</td>
             <td>{{ address.lastname }}</td>
-            <td><a class="btn" href="#/addressbook/{{address.id}}" ng-click="edit(address)">edit</a></td>
+            <td><a class="btn" href="#/addressbook/entry/{{ address.id }}">edit</a></td>
         </tr>
     </tbody>
 </table>
 
 <div class="pagination">
     <ul>
-        <li><a href="#">Prev</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">Next</a></li>
+        <li ng-class="{disabled: !hasPreviousPage()}"><a href="#">Prev</a></li>
+
+        <li ng-repeat="n in pages()"
+            ng-class="{active: n == addresses.number}">
+            <a href="#/addressbook/{{ n }}">{{ n + 1 }}</a>
+        </li>
+
+        <li ng-class="{disabled: !hasNextPage()}"><a href="#">Next</a></li>
     </ul>
 </div>
 
 
-<a href="#/addressbook/new" class="btn btn-primary">Add new</a>
+<a href="#/addressbook/entry/new" class="btn btn-primary">Add new</a>

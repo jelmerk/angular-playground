@@ -2,6 +2,7 @@ package org.github.jkuperus.addressbook.service;
 
 import org.github.jkuperus.addressbook.domain.Address;
 import org.github.jkuperus.addressbook.persistence.AddressRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
@@ -32,14 +33,17 @@ public class AddressResource {
 
     @GET
     @Produces(APPLICATION_JSON)
-    public Iterable<Address> findAll(@DefaultValue("0") @QueryParam("pageStartIndex") int pageStartIndex,
-                                     @DefaultValue("0") @QueryParam("pageSize") int pageSize) {
+    public Page<Address> findAll(@DefaultValue("0") @QueryParam("pageStartIndex") int pageStartIndex,
+                                 @DefaultValue("0") @QueryParam("pageSize") int pageSize) {
 
+        Pageable pageable;
         if (pageSize > 0) {
-            Pageable pageable = new PageRequest(pageStartIndex, pageSize);
-            return addressRepository.findAll(pageable);
+            pageable = new PageRequest(pageStartIndex, pageSize);
+        } else {
+            pageable = new PageRequest(0, Integer.MAX_VALUE);
         }
-        return addressRepository.findAll();
+
+        return addressRepository.findAll(pageable);
     }
 
     @GET
