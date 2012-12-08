@@ -1,10 +1,8 @@
-package org.github.jkuperus.addressbook.service;
+package org.github.jkuperus.addressbook.web;
 
 import org.github.jkuperus.addressbook.domain.Address;
-import org.github.jkuperus.addressbook.persistence.AddressRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.github.jkuperus.addressbook.service.AddressService;
+import org.github.jkuperus.addressbook.service.Page;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -24,11 +22,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class AddressResource {
 
     @Inject
-    private AddressRepository addressRepository;
+    private AddressService addressService;
 
     @PostConstruct
     private void initialize() {
-        checkNotNull(addressRepository, "addressRepository must not be null.");
+        checkNotNull(addressService, "addressService must not be null.");
     }
 
     @GET
@@ -36,21 +34,14 @@ public class AddressResource {
     public Page<Address> findAll(@DefaultValue("0") @QueryParam("pageStartIndex") int pageStartIndex,
                                  @DefaultValue("0") @QueryParam("pageSize") int pageSize) {
 
-        Pageable pageable;
-        if (pageSize > 0) {
-            pageable = new PageRequest(pageStartIndex, pageSize);
-        } else {
-            pageable = new PageRequest(0, Integer.MAX_VALUE);
-        }
-
-        return addressRepository.findAll(pageable);
+        return addressService.findAll(pageStartIndex, pageSize);
     }
 
     @GET
     @Path("{id}")
     @Produces(APPLICATION_JSON)
     public Address findById(@PathParam("id") String id) {
-        Address address = addressRepository.findOne(id);
+        Address address = addressService.findOne(id);
         if (address == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -62,7 +53,7 @@ public class AddressResource {
     @Consumes(APPLICATION_JSON)
     public Response update(@PathParam("id") String id, Address update) {
 
-        Address address = addressRepository.findOne(id);
+        Address address = addressService.findOne(id);
 
         if (address == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -72,7 +63,7 @@ public class AddressResource {
         address.setMiddlename(update.getMiddlename());
         address.setLastname(update.getLastname());
 
-        addressRepository.save(address);
+        addressService.save(address);
 
         return Response.noContent().build();
     }
@@ -80,21 +71,16 @@ public class AddressResource {
     @DELETE
     @Path("{id}")
     public Response delete(@PathParam("id") String id) {
-        Address address = addressRepository.findOne(id);
-
-        if (address == null) {
+        if (!addressService.delete(id)) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
-        addressRepository.delete(address);
-
         return Response.noContent().build();
     }
 
     @POST
     @Consumes(APPLICATION_JSON)
     public Response save(Address address, @Context UriInfo uriInfo) {
-        addressRepository.save(address);
+        addressService.save(address);
 
         URI uri = uriInfo.getAbsolutePathBuilder()
                                 .path(address.getId())

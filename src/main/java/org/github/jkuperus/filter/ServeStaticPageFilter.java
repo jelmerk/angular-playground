@@ -14,7 +14,7 @@ public class ServeStaticPageFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-
+        // do nothing
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ServeStaticPageFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        // do nothing
     }
 
     protected boolean shouldForward(HttpServletRequest request) {

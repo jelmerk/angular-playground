@@ -46,7 +46,7 @@
             <param-name>
                 com.sun.jersey.config.property.packages
             </param-name>
-            <param-value>org.github.jkuperus.addressbook.service</param-value>
+            <param-value>org.github.jkuperus.addressbook.web</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
