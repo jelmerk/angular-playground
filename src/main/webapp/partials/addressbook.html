@@ -25,7 +25,9 @@
 <div class="pagination">
     <ul>
         <li ng-class="{disabled: !hasPreviousPage()}">
-            <a href="/addressbook/{{ addresses.number - 1 }}">Prev</a>
+            <a href="/addressbook/{{ addresses.number - 1 }}" ng-show="hasPreviousPage()">Prev</a>
+
+            <a href="" ng-show="!hasPreviousPage()" onclick="return false;">Prev</a>
         </li>
 
         <li ng-repeat="n in pages()"
@@ -34,7 +36,9 @@
         </li>
 
         <li ng-class="{disabled: !hasNextPage()}">
-            <a href="/addressbook/{{ addresses.number + 1 }}">Next</a>
+            <a href="/addressbook/{{ addresses.number + 1 }}" ng-show="hasNextPage()">Next</a>
+
+            <a href="" ng-show="!hasNextPage()" onclick="return false;">Next</a>
         </li>
     </ul>
 </div>
