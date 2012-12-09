@@ -1,8 +1,8 @@
 'use strict';
 
-function AddressBookController($scope, $routeParams, Address) {
+function AddressBookController($scope, page) {
 
-    var page = Address.pagedQuery({ pageSize: 5, pageStartIndex: $routeParams.pageStartIndex});
+    $scope.addresses = page;
 
     $scope.hasPreviousPage = function() {
         return !page.firstPage;
@@ -38,11 +38,26 @@ function AddressBookController($scope, $routeParams, Address) {
     $scope.hasNextPage = function() {
         return !page.lastPage;
     }
-
-    $scope.addresses = page;
-
 }
-AddressBookController.$inject = ['$scope', '$routeParams', 'Address'];
+
+AddressBookController.resolve = {
+    page: function($q, $route, Address) {
+
+        var pageStartIndex = $route.current.params.pageStartIndex;
+
+        var deferred = $q.defer();
+
+        Address.pagedQuery({ pageSize: 5, pageStartIndex: pageStartIndex }, function(result) {
+            deferred.resolve(result);
+        });
+
+        return deferred.promise;
+    }
+}
+
+// TODO fix inject for AddressBookController, and AddressBookController.resolve how does that work ?
+
+// AddressBookController.$inject = ['$scope', '$routeParams', 'Address'];
 
 function AddressController($scope, $location, $routeParams, Address) {
 
