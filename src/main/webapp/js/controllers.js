@@ -40,8 +40,10 @@ function AddressBookController($scope, page) {
     }
 }
 
+AddressBookController.$inject = ['$scope', 'page'];
+
 AddressBookController.resolve = {
-    page: function($q, $route, Address) {
+    'page': function($q, $route, Address) {
 
         var pageStartIndex = $route.current.params.pageStartIndex;
 
@@ -55,9 +57,7 @@ AddressBookController.resolve = {
     }
 }
 
-// TODO fix inject for AddressBookController, and AddressBookController.resolve how does that work ?
-
-// AddressBookController.$inject = ['$scope', '$routeParams', 'Address'];
+AddressBookController.resolve.page.$inject = ['$q', '$route', 'Address'];
 
 function AddressController($scope, $location, $routeParams, Address) {
 
