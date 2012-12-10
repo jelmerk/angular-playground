@@ -61,6 +61,8 @@ AddressBookController.resolve.page.$inject = ['$q', '$route', 'Address'];
 
 function AddressController($scope, $location, $routeParams, Address) {
 
+    var self = this;
+
     var back = function() {
         $location.path('/addressbook');
     };
@@ -68,7 +70,10 @@ function AddressController($scope, $location, $routeParams, Address) {
     if ($routeParams.addressId === 'new') {
         $scope.address = new Address();
     } else {
-        $scope.address = Address.get({id: $routeParams.addressId});
+        Address.get({id: $routeParams.addressId}, function(address) {
+            self.original = address;
+            $scope.address = new Address(self.original);
+        });
     }
 
     $scope.add = function(newAddress) {
@@ -83,6 +88,10 @@ function AddressController($scope, $location, $routeParams, Address) {
         if (confirm('Are you sure you want to delete this address?')) {
             existingAddress.$delete(back);
         }
+    }
+
+    $scope.isClean = function() {
+        return angular.equals(self.original, $scope.address);
     }
 }
 AddressController.$inject = ['$scope', '$location', '$routeParams', 'Address'];
