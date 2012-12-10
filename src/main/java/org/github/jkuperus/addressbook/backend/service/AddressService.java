@@ -1,6 +1,6 @@
-package org.github.jkuperus.addressbook.service;
+package org.github.jkuperus.addressbook.backend.service;
 
-import org.github.jkuperus.addressbook.domain.Address;
+import org.github.jkuperus.addressbook.backend.domain.Address;
 
 /**
  * @author Jelmer Kuperus

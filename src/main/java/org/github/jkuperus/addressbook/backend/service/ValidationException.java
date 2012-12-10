@@ -1,4 +1,4 @@
-package org.github.jkuperus.addressbook.service;
+package org.github.jkuperus.addressbook.backend.service;
 
 /**
  * @author Jelmer Kuperus

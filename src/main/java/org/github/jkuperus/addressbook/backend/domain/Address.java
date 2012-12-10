@@ -1,4 +1,4 @@
-package org.github.jkuperus.addressbook.domain;
+package org.github.jkuperus.addressbook.backend.domain;
 
 import com.google.common.base.Objects;
 

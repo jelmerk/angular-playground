@@ -1,10 +1,13 @@
-package org.github.jkuperus.addressbook.service;
+package org.github.jkuperus.addressbook.backend.service;
 
-import org.github.jkuperus.addressbook.domain.Address;
-import org.github.jkuperus.addressbook.persistence.AddressRepository;
+import org.github.jkuperus.addressbook.backend.domain.Address;
+import org.github.jkuperus.addressbook.backend.persistence.AddressRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkArgument;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,12 +23,16 @@ public class DefaultAddressService implements AddressService {
 
     @Override
     public Page<Address> findAll(int pageStartIndex, int pageSize) {
-        Pageable pageable;
-        if (pageSize > 0) {
-            pageable = new PageRequest(pageStartIndex, pageSize);
+        checkArgument(pageStartIndex >= 0, "PageStartIndex cannot be less than 0");
+
+        int realPageSize;
+        if (pageSize < 0) {
+            realPageSize = Integer.MAX_VALUE;
         } else {
-            pageable = new PageRequest(0, Integer.MAX_VALUE);
+            realPageSize = pageSize;
         }
+
+        Pageable pageable = new PageRequest(pageStartIndex, realPageSize, Sort.Direction.ASC, "firstname");
         return new Page<Address>(addressRepository.findAll(pageable));
     }
 

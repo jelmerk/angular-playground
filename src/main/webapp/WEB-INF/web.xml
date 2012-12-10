@@ -29,7 +29,7 @@
 
     <filter>
         <filter-name>serve-static-page-filter</filter-name>
-        <filter-class>org.github.jkuperus.filter.ServeStaticPageFilter</filter-class>
+        <filter-class>org.github.jkuperus.addressbook.web.filter.ServeStaticPageFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -46,7 +46,7 @@
             <param-name>
                 com.sun.jersey.config.property.packages
             </param-name>
-            <param-value>org.github.jkuperus.addressbook.web</param-value>
+            <param-value>org.github.jkuperus.addressbook.web.resource</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>

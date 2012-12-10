@@ -1,4 +1,4 @@
-package org.github.jkuperus.filter;
+package org.github.jkuperus.addressbook.web.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

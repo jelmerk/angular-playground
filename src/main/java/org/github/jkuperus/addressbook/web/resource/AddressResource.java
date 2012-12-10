@@ -1,9 +1,9 @@
-package org.github.jkuperus.addressbook.web;
+package org.github.jkuperus.addressbook.web.resource;
 
-import org.github.jkuperus.addressbook.domain.Address;
-import org.github.jkuperus.addressbook.service.AddressService;
-import org.github.jkuperus.addressbook.service.Page;
-import org.github.jkuperus.addressbook.service.ValidationException;
+import org.github.jkuperus.addressbook.backend.domain.Address;
+import org.github.jkuperus.addressbook.backend.service.AddressService;
+import org.github.jkuperus.addressbook.backend.service.Page;
+import org.github.jkuperus.addressbook.backend.service.ValidationException;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
