@@ -11,7 +11,7 @@ public interface AddressService {
 
     Address findOne(String id);
 
-    Address save(Address address);
+    Address save(Address address) throws ValidationException;
 
     boolean delete(String addressId);
 }

@@ -3,6 +3,7 @@ package org.github.jkuperus.addressbook.web;
 import org.github.jkuperus.addressbook.domain.Address;
 import org.github.jkuperus.addressbook.service.AddressService;
 import org.github.jkuperus.addressbook.service.Page;
+import org.github.jkuperus.addressbook.service.ValidationException;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -52,7 +53,6 @@ public class AddressResource {
     @Path("{id}")
     @Consumes(APPLICATION_JSON)
     public Response update(@PathParam("id") String id, Address update) {
-
         Address address = addressService.findOne(id);
 
         if (address == null) {
@@ -63,7 +63,11 @@ public class AddressResource {
         address.setMiddlename(update.getMiddlename());
         address.setLastname(update.getLastname());
 
-        addressService.save(address);
+        try {
+            addressService.save(address);
+        } catch (ValidationException e) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
 
         return Response.noContent().build();
     }
@@ -80,7 +84,11 @@ public class AddressResource {
     @POST
     @Consumes(APPLICATION_JSON)
     public Response save(Address address, @Context UriInfo uriInfo) {
-        addressService.save(address);
+        try {
+            addressService.save(address);
+        } catch (ValidationException e) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
 
         URI uri = uriInfo.getAbsolutePathBuilder()
                                 .path(address.getId())
